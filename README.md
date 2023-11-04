@@ -1,0 +1,20 @@
+# Oficinar
+
+Oficinar é um software de código livre multiplataforma de instalação rápida e fácil. Desenvolvido para atender a demanda de pequenas de reparo/conserto de itens/produtos.
+
+# Features
+*Tarefas com descrição **Gerenciar** devem conter métodos para leitura, adicionar, atualizar e deletar.*
+
+- [ ] Gerenciar usuário.
+- [ ] Gerenciar cliente.
+- [ ] Gerenciar técnico.
+- [ ] Gerenciar reparo.
+- [ ] Gerenciar item.
+- [ ] Autenticação de usuários.
+- [ ] Logger.
+- [ ] Gerenciar permissões/políticas referente ao usuário.
+- [ ] Gerar relatórios personalizados.
+- [ ] Imprimir relatórios.
+
+# Especificações técnicas
+Para rápida e fácil instalação será utilizado SQLite (banco de dados). Software desenvolvido com Flutter/Dart pela grande portabilidade de plataformas. 

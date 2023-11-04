@@ -1,6 +1,6 @@
 # Oficinar
 
-Oficinar é um software de código livre multiplataforma de instalação rápida e fácil. Desenvolvido para atender a demanda de pequenas de reparo/conserto de itens/produtos.
+Oficinar é um software de código livre multiplataforma de instalação rápida e fácil. Desenvolvido para atender a demanda de reparo de itens de pequenas empresas.
 
 # Features
 *Tarefas com descrição **Gerenciar** devem conter métodos para leitura, adicionar, atualizar e deletar.*

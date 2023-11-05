@@ -1,4 +1,4 @@
-import 'package:oficinar/database/schemas/user_migration.dart';
+import 'package:oficinar/database/migrations.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart' as p;
@@ -19,23 +19,20 @@ class DatabaseCore {
         throw Exception("Diretório não encontrado");
       }
 
+      int migrations = Migrations.scripts.length;
       Database db = await databaseFactory.openDatabase(dbPath,
           options: OpenDatabaseOptions(
             version: version,
             onConfigure: (db) => _onConfigure(db),
             onCreate: (db, version) async {
-              var batch = db.batch();
-              UserMigration.createTable(batch);
-              await batch.commit();
+              for (var i = 1; i <= migrations; i++) {
+                await db.execute(Migrations.scripts[i]!);
+              }
             },
             onUpgrade: (db, oldVersion, newVersion) async {
-              var batch = db.batch();
-              if (oldVersion == 1) {
-                UserMigration.updateTable(batch);
-                batch.commit();
+              for (int i = oldVersion + 1; i <= newVersion; i++) {
+                await db.execute(Migrations.scripts[i]!);
               }
-
-              await batch.commit();
             },
             onDowngrade: onDatabaseDowngradeDelete,
           ));

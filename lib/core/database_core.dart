@@ -1,3 +1,4 @@
+import 'package:oficinar/database/schemas/user_migration.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart' as p;
@@ -13,8 +14,7 @@ class DatabaseCore {
     try {
       var databaseFactory = databaseFactoryFfi;
       final dir = await getApplicationDocumentsDirectory();
-      String dbPath = p.join(dir.path,
-          "/home/maugusto/Dev/oficinar/lib/database", "oficinar_$version.db");
+      String dbPath = p.join(dir.path, "database", "oficinar.db");
       if (dbPath.isEmpty) {
         throw Exception("Diretório não encontrado");
       }
@@ -22,14 +22,23 @@ class DatabaseCore {
       Database db = await databaseFactory.openDatabase(dbPath,
           options: OpenDatabaseOptions(
             version: version,
+            onConfigure: (db) => _onConfigure(db),
             onCreate: (db, version) async {
-              await db.execute(_migration);
+              var batch = db.batch();
+              UserMigration.createTable(batch);
+              await batch.commit();
             },
-          ));
+            onUpgrade: (db, oldVersion, newVersion) async {
+              var batch = db.batch();
+              if (oldVersion == 1) {
+                UserMigration.updateTable(batch);
+                batch.commit();
+              }
 
-      if (await db.getVersion() < 0) {
-        throw Exception("Banco de dados não iniciado");
-      }
+              await batch.commit();
+            },
+            onDowngrade: onDatabaseDowngradeDelete,
+          ));
 
       return db;
     } catch (e) {
@@ -54,17 +63,10 @@ class DatabaseCore {
 
   Future<List<Map<dynamic, dynamic>>> toList() async {
     final db = await DatabaseCore(version: version)._init();
-    return db.query(_query!);
+    return db.rawQuery(_query!);
   }
 }
 
-String _migration = '''
-CREATE TABLE IF NOT EXISTS users(
-  id INT AUTO_INCREMENT,
-  username TEXT NOT NULL UNIQUE,
-  password TEXT NOT NULL,
-  first_name TEXT NOT NULL,
-  last_name TEXT NOT NULL,
-  PRIMARY KEY (id)
-);
-''';
+Future<void> _onConfigure(Database db) async {
+  await db.execute('PRAGMA foreign_keys = ON');
+}

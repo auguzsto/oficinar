@@ -6,6 +6,6 @@ final getDep = GetIt.instance;
 
 void setup() {
   getDep.registerSingletonAsync<DatabaseCore>(
-      () async => DatabaseCore(version: 1));
+      () async => DatabaseCore(version: 2));
   getDep.registerSingleton<UserModel>(UserModel());
 }

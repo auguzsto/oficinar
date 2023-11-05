@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/modules/auth/auth_view.dart';
+import 'package:oficinar/themes/themes.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -9,7 +10,8 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       title: "Oficinar",
       home: const AuthView(),
-      theme: ThemeData(useMaterial3: true),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
     );
   }

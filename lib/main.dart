@@ -6,11 +6,8 @@ import 'package:oficinar/injector_depency.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //Inject dependecy.
+  //Injection dependecies.
   setup();
-
-  //Init database SQLite.
-  getDep.getAsync<DatabaseCore>();
 
   runApp(const AppWidget());
 }

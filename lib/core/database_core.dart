@@ -4,6 +4,7 @@ import 'package:path/path.dart' as p;
 
 class DatabaseCore {
   int version;
+  String? _query;
   DatabaseCore({required this.version}) {
     _init();
   }
@@ -34,6 +35,26 @@ class DatabaseCore {
     } catch (e) {
       rethrow;
     }
+  }
+
+  DatabaseCore select(String columns, String table) {
+    _query = "SELECT $columns FROM $table";
+    return this;
+  }
+
+  DatabaseCore where(String conditions) {
+    _query = "$_query WHERE $conditions";
+    return this;
+  }
+
+  DatabaseCore and() {
+    _query = "$_query AND";
+    return this;
+  }
+
+  Future<List<Map<dynamic, dynamic>>> toList() async {
+    final db = await DatabaseCore(version: version)._init();
+    return db.query(_query!);
   }
 }
 

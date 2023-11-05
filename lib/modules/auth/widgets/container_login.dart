@@ -46,9 +46,8 @@ class ContainerLoginView extends StatelessWidget {
             icon: const Icon(Icons.check),
             label: const Text("Entrar"),
             onPressed: () async {
-              final authModel =
-                  AuthModel(_controllerLogin.text, _controllerPassword.text);
-              await AuthController.signIn(authModel);
+              await AuthController.signIn(
+                  _controllerLogin.text, _controllerPassword.text, context);
             },
           )
         ],

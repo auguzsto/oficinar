@@ -14,7 +14,7 @@ class AuthView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(),
-            ContainerLoginView(),
+            const ContainerLoginView(),
           ],
         ),
       ),

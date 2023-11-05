@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ButtonAction extends StatelessWidget {
-  const ButtonAction({super.key});
+  final void Function()? onPressed;
+  final Widget icon;
+  final Widget label;
+  const ButtonAction({
+    super.key,
+    required this.onPressed,
+    required this.icon,
+    required this.label,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +21,9 @@ class ButtonAction extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
           ),
         ),
-        onPressed: () {},
-        icon: Icon(Icons.check),
-        label: Text("This button"),
+        onPressed: onPressed,
+        icon: icon,
+        label: label,
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:oficinar/modules/auth/auth_controller.dart';
+import 'package:oficinar/modules/auth/auth_model.dart';
 import 'package:oficinar/widgets/button_action.dart';
 import 'package:oficinar/widgets/input_text.dart';
 
@@ -27,14 +29,33 @@ class ContainerLoginView extends StatelessWidget {
               size: MediaQuery.of(context).size.height / 10,
             ),
           ),
-          SizedBox(height: 10),
-          InputTextWidget(labelText: "Login", iconData: Icons.person),
-          SizedBox(height: 10),
-          InputTextWidget(labelText: "Senha", iconData: Icons.key),
-          SizedBox(height: 10),
-          ButtonAction()
+          const SizedBox(height: 20),
+          InputTextWidget(
+            controller: _controllerLogin,
+            labelText: "Login",
+            iconData: Icons.person,
+          ),
+          const SizedBox(height: 10),
+          InputTextWidget(
+            controller: _controllerPassword,
+            labelText: "Senha",
+            iconData: Icons.key,
+          ),
+          const SizedBox(height: 10),
+          ButtonAction(
+            icon: const Icon(Icons.check),
+            label: const Text("Entrar"),
+            onPressed: () async {
+              final authModel =
+                  AuthModel(_controllerLogin.text, _controllerPassword.text);
+              await AuthController.signIn(authModel);
+            },
+          )
         ],
       ),
     );
   }
 }
+
+final _controllerLogin = TextEditingController();
+final _controllerPassword = TextEditingController();

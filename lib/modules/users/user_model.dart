@@ -3,8 +3,6 @@ import 'package:oficinar/core/model.dart';
 class UserModel implements Model {
   String? username;
   String? password;
-  String? firstName;
-  String? lastName;
 
   @override
   String? createdAt;
@@ -22,8 +20,6 @@ class UserModel implements Model {
     this.id,
     this.username,
     this.password,
-    this.firstName,
-    this.lastName,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
@@ -34,8 +30,6 @@ class UserModel implements Model {
       id: json['id'],
       username: json['username'],
       password: json['password'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       deletedAt: json['deleted_at'],
@@ -47,8 +41,6 @@ class UserModel implements Model {
       "id": id,
       "username": username,
       "password": password,
-      "first_name": firstName,
-      "last_name": lastName,
       "created_at": createdAt,
       "updated_at": updatedAt,
       "deleted_at": deletedAt,

@@ -12,11 +12,13 @@ class ContainerMenuLeft extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondaryContainer,
         border: Border(
-            right: BorderSide(
-                color: Theme.of(context).colorScheme.onSecondaryContainer)),
+          right: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
       ),
       child: ListView(
-        children: const [
+        children: [
           AvatarMenuLeft(),
           CardMenuLeft(icon: Icons.home_repair_service, title: "Aparelhos"),
           CardMenuLeft(icon: Icons.person, title: "Usuários"),

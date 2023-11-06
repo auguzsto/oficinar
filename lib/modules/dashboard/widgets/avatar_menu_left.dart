@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:oficinar/injector_depency.dart';
+import 'package:oficinar/modules/users/user_model.dart';
 
 class AvatarMenuLeft extends StatelessWidget {
-  const AvatarMenuLeft({super.key});
+  AvatarMenuLeft({super.key});
+
+  final userModel = getDep.get<UserModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -9,11 +13,12 @@ class AvatarMenuLeft extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: CircleAvatar(
         maxRadius: MediaQuery.of(context).size.height / 10,
-        backgroundColor: Theme.of(context).colorScheme.tertiary,
-        foregroundColor: Theme.of(context).colorScheme.onTertiary,
-        child: Icon(
-          Icons.person,
-          size: MediaQuery.of(context).size.height / 10,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        foregroundColor: Theme.of(context).colorScheme.primary,
+        child: Text(
+          userModel.username![0].toUpperCase(),
+          style: TextStyle(
+              fontSize: Theme.of(context).textTheme.displayLarge!.fontSize),
         ),
       ),
     );

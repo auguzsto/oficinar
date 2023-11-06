@@ -29,7 +29,8 @@ class CardMenuLeft extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(icon),
+                Icon(icon,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant),
                 const SizedBox(width: 20),
                 Text(
                   title,

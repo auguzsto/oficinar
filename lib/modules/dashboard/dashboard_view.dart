@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:oficinar/modules/dashboard/widgets/avatar_menu_left.dart';
 import 'package:oficinar/modules/dashboard/widgets/container_menu_left.dart';
 import 'package:oficinar/modules/users/user_model.dart';
 

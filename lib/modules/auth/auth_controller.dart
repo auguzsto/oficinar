@@ -11,14 +11,29 @@ class AuthController {
       String username, String password, BuildContext context) async {
     try {
       final db = getDep.get<DatabaseCore>();
-      final data = await db.select("*", "users").single();
-      final userModel =
-          getDep.registerSingleton<UserModel>(UserModel.fromJson(data));
+      late UserModel userModel;
+
+      userModel = UserModel.fromJson({
+        "username": username,
+        "password": password,
+      });
+
+      final data = await db
+          .select("*", "users")
+          .where("username = '$username' AND password = '$password'")
+          .toList();
+      if (data.isEmpty) {
+        throw Exception("Usuário ou senha inválidos.");
+      }
+
+      userModel =
+          getDep.registerSingleton<UserModel>(UserModel.fromJson(data[0]));
       print(userModel.toJson());
     } catch (e) {
       throw showHandler(
           context,
           HandlerException(
+            title: "Atenção",
             content: e.toString(),
             textLeftButton: "Entendido",
           ));

@@ -54,20 +54,27 @@ class DatabaseCore {
     return this;
   }
 
-  DatabaseCore and() {
-    _query = "$_query AND";
+  DatabaseCore and(String conditions) {
+    _query = "$_query AND $conditions";
     return this;
   }
 
-  Future<List<Map<dynamic, dynamic>>> toList() async {
+  Future<List<Map<String, dynamic>>> toList() async {
     final db = await DatabaseCore(version: version)._init();
     return db.rawQuery(_query!);
   }
 
   Future<Map<String, dynamic>> single() async {
-    final db = await DatabaseCore(version: version)._init();
-    final single = await db.rawQuery(_query!);
-    return Map.castFrom(single[0]);
+    try {
+      final db = await DatabaseCore(version: version)._init();
+      final single = await db.rawQuery(_query!);
+      if (single.isEmpty) {
+        throw Exception("Por favor, tente novamente.");
+      }
+      return Map.castFrom(single[0]);
+    } catch (e) {
+      rethrow;
+    }
   }
 }
 

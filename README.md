@@ -10,7 +10,7 @@ Oficinar é um software de código livre multiplataforma de instalação rápida
 - [ ] Gerenciar técnico.
 - [ ] Gerenciar reparo.
 - [ ] Gerenciar item.
-- [ ] Autenticação de usuários.
+- [x] Autenticação de usuários.
 - [ ] Logger.
 - [ ] Gerenciar permissões/políticas referente ao usuário.
 - [ ] Gerar relatórios personalizados.

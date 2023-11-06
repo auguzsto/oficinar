@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/modules/auth/widgets/container_login.dart';
+import 'package:oficinar/widgets/night_theme_floating.dart';
 
 class AuthView extends StatelessWidget {
   const AuthView({super.key});
@@ -18,6 +19,7 @@ class AuthView extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: const NightThemeFloating(),
     );
   }
 }

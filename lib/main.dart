@@ -10,10 +10,12 @@ void main() async {
   //Injection dependecies.
   setup();
 
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => ThemesController())
-    ],
-    child: const AppWidget(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemesController())
+      ],
+      child: const AppWidget(),
+    ),
+  );
 }

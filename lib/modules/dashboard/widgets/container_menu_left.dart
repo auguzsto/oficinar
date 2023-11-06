@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/modules/dashboard/widgets/avatar_menu_left.dart';
 import 'package:oficinar/modules/dashboard/widgets/card_menu_left.dart';
+import 'package:oficinar/widgets/button_action.dart';
 
 class ContainerMenuLeft extends StatelessWidget {
   const ContainerMenuLeft({super.key});
@@ -20,11 +21,30 @@ class ContainerMenuLeft extends StatelessWidget {
       child: ListView(
         children: [
           AvatarMenuLeft(),
-          CardMenuLeft(icon: Icons.home_repair_service, title: "Aparelhos"),
-          CardMenuLeft(icon: Icons.person, title: "Usuários"),
-          CardMenuLeft(icon: Icons.person_pin, title: "Clientes"),
-          CardMenuLeft(icon: Icons.security, title: "Políticas"),
-          CardMenuLeft(icon: Icons.calendar_month, title: "Agenda"),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+            child: ButtonAction(
+                alignment: Alignment.centerLeft,
+                onPressed: () {},
+                icon: const Icon(Icons.build_circle_sharp),
+                label: const Text('Ordens de serviço')),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+            child: ButtonAction(
+                alignment: Alignment.centerLeft,
+                onPressed: () {},
+                icon: const Icon(Icons.devices_other_rounded),
+                label: const Text('Aparelhos')),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+            child: ButtonAction(
+                alignment: Alignment.centerLeft,
+                onPressed: () {},
+                icon: const Icon(Icons.person),
+                label: const Text('Clientes')),
+          ),
         ],
       ),
     );

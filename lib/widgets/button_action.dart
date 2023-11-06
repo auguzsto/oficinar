@@ -5,8 +5,10 @@ class ButtonAction extends StatelessWidget {
   final Widget icon;
   final Widget label;
   final double? height;
+  final Alignment? alignment;
   const ButtonAction({
     super.key,
+    this.alignment,
     required this.onPressed,
     required this.icon,
     required this.label,
@@ -19,6 +21,7 @@ class ButtonAction extends StatelessWidget {
       height: height ?? 50,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
+          alignment: alignment ?? Alignment.center,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),

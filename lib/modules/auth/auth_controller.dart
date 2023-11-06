@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:oficinar/core/database_core.dart';
+import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/injector_depency.dart';
+import 'package:oficinar/modules/dashboard/dashboard_view.dart';
 import 'package:oficinar/modules/users/user_model.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 
@@ -29,7 +31,8 @@ class AuthController {
 
       getDep.registerSingleton<UserModel>(UserModel.fromJson(data[0]));
       userModel = getDep.get<UserModel>();
-      print(userModel.toJson());
+      Navigation.pushAndRemovePile(
+          DashboardView(userModel: userModel), context);
     } catch (e) {
       throw showHandler(
           context,

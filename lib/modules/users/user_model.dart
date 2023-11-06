@@ -23,7 +23,19 @@ class UserModel implements Model {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
-  });
+  }) {
+    try {
+      if (username!.isEmpty) {
+        throw Exception("Campo login deve ser preenchido.");
+      }
+
+      if (password!.isEmpty) {
+        throw Exception("Campo senha deve ser preenchido.");
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(

@@ -12,6 +12,7 @@ class DatabaseCore {
 
   Future<Database> _init() async {
     try {
+      sqfliteFfiInit();
       var databaseFactory = databaseFactoryFfi;
       final dir = await getApplicationDocumentsDirectory();
       String dbPath = p.join(dir.path, "database", "oficinar.db");
@@ -61,6 +62,12 @@ class DatabaseCore {
   Future<List<Map<dynamic, dynamic>>> toList() async {
     final db = await DatabaseCore(version: version)._init();
     return db.rawQuery(_query!);
+  }
+
+  Future<Map<String, dynamic>> single() async {
+    final db = await DatabaseCore(version: version)._init();
+    final single = await db.rawQuery(_query!);
+    return Map.castFrom(single[0]);
   }
 }
 

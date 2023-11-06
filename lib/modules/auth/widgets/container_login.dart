@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/modules/auth/auth_controller.dart';
-import 'package:oficinar/modules/auth/auth_model.dart';
 import 'package:oficinar/widgets/button_action.dart';
 import 'package:oficinar/widgets/input_text.dart';
 

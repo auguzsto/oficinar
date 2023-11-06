@@ -20,20 +20,20 @@ class AuthController {
 
       final data = await db
           .select("*", "users")
-          .where("username = '$username' AND password = '$password'")
+          .where("username = '$username'")
+          .and("password = '$password'")
           .toList();
       if (data.isEmpty) {
         throw Exception("Usuário ou senha inválidos.");
       }
 
-      userModel =
-          getDep.registerSingleton<UserModel>(UserModel.fromJson(data[0]));
+      getDep.registerSingleton<UserModel>(UserModel.fromJson(data[0]));
+      userModel = getDep.get<UserModel>();
       print(userModel.toJson());
     } catch (e) {
       throw showHandler(
           context,
           HandlerException(
-            title: "Atenção",
             content: e.toString(),
             textLeftButton: "Entendido",
           ));

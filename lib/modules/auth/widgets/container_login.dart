@@ -36,6 +36,7 @@ class ContainerLoginView extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           InputTextWidget(
+            obscureText: true,
             controller: _controllerPassword,
             labelText: "Senha",
             iconData: Icons.key,

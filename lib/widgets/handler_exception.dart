@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:oficinar/widgets/button_action.dart';
 
 class HandlerException extends StatelessWidget {
-  final String? title;
   final String? content;
   final void Function()? leftOnPressed;
   final String? textLeftButton;
@@ -10,7 +9,6 @@ class HandlerException extends StatelessWidget {
   final String? textRightButton;
   const HandlerException({
     super.key,
-    this.title,
     this.content,
     this.leftOnPressed,
     this.textLeftButton,
@@ -21,7 +19,6 @@ class HandlerException extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(title ?? ""),
       icon: CircleAvatar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -29,7 +26,10 @@ class HandlerException extends StatelessWidget {
         child:
             Icon(Icons.warning, size: MediaQuery.of(context).size.height / 10),
       ),
-      content: Text(_handlerContentString(content!)),
+      content: Text(
+        _handlerContentString(content!),
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
       actions: [
         ButtonAction(
           height: 35,

@@ -60,8 +60,12 @@ class DatabaseCore {
   }
 
   Future<List<Map<String, dynamic>>> toList() async {
-    final db = await DatabaseCore(version: version)._init();
-    return db.rawQuery(_query!);
+    try {
+      final db = await DatabaseCore(version: version)._init();
+      return db.rawQuery(_query!);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<Map<String, dynamic>> single() async {

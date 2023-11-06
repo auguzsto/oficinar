@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/modules/dashboard/widgets/avatar_menu_left.dart';
-import 'package:oficinar/modules/dashboard/widgets/card_menu_left.dart';
 import 'package:oficinar/widgets/button_action.dart';
 
 class ContainerMenuLeft extends StatelessWidget {

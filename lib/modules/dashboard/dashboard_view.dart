@@ -15,7 +15,7 @@ class DashboardView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ContainerMenuLeft(),
+            const ContainerMenuLeft(),
             Container(),
           ],
         ),

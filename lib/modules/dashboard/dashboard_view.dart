@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:oficinar/modules/auth/widgets/container_login.dart';
-import 'package:oficinar/widgets/night_theme_floating.dart';
+import 'package:oficinar/modules/dashboard/widgets/container_menu_left.dart';
+import 'package:oficinar/modules/users/user_model.dart';
 
-class AuthView extends StatelessWidget {
-  const AuthView({super.key});
+class DashboardView extends StatelessWidget {
+  final UserModel userModel;
+  const DashboardView({super.key, required this.userModel});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +15,11 @@ class AuthView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const ContainerMenuLeft(),
             Container(),
-            const ContainerLoginView(),
           ],
         ),
       ),
-      floatingActionButton: const NightThemeFloating(),
     );
   }
 }

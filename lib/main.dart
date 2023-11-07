@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/app_widget.dart';
 import 'package:oficinar/injector_depency.dart';
+import 'package:oficinar/modules/themes/themes_controller.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //Injection dependecies.
   setup();
-  runApp(const AppWidget());
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemesController())
+      ],
+      child: const AppWidget(),
+    ),
+  );
 }

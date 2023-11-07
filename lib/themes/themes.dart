@@ -10,12 +10,3 @@ ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   colorScheme: darkColorScheme,
 );
-
-class ThemeProvider with ChangeNotifier {
-  final ThemeData themeData;
-  ThemeProvider(this.themeData) {
-    _change();
-  }
-
-  void _change() {}
-}

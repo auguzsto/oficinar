@@ -21,6 +21,14 @@ class LoggerModel implements Model {
     this.createdAt,
   );
 
+  factory LoggerModel.fromJson(Map<String, dynamic> json) {
+    return LoggerModel(
+      json['author'],
+      json['describe'],
+      json['created_at'],
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       "author": author,

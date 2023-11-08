@@ -27,7 +27,9 @@ class ContainerMenuLeft extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
             child: ButtonAction(
                 alignment: Alignment.centerLeft,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<Navigation>().pageView(const Column());
+                },
                 icon: const Icon(Icons.build_circle_sharp),
                 label: const Text('Ordens de serviço')),
           ),
@@ -52,7 +54,7 @@ class ContainerMenuLeft extends StatelessWidget {
             child: ButtonAction(
                 alignment: Alignment.centerLeft,
                 onPressed: () {
-                  context.read<Navigation>().pageView(LoggerView());
+                  context.read<Navigation>().pageView(const LoggerView());
                 },
                 icon: const Icon(Icons.app_registration_outlined),
                 label: const Text('Logs')),

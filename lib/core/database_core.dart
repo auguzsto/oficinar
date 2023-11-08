@@ -59,6 +59,21 @@ class DatabaseCore {
     return this;
   }
 
+  DatabaseCore orderByAsc(String columns) {
+    _query = "$_query ORDER BY $columns ASC";
+    return this;
+  }
+
+  DatabaseCore orderByDesc(String columns) {
+    _query = "$_query ORDER BY $columns DESC";
+    return this;
+  }
+
+  DatabaseCore limit(int limit) {
+    _query = "$_query LIMIT $limit";
+    return this;
+  }
+
   Future<List<Map<String, dynamic>>> toList() async {
     try {
       final db = await DatabaseCore(version: version)._init();

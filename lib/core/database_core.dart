@@ -80,6 +80,12 @@ class DatabaseCore {
       rethrow;
     }
   }
+
+  Future<void> insert(
+      String table, Map<String, dynamic> columnsAndValues) async {
+    final db = await DatabaseCore(version: version)._init();
+    await db.insert(table, columnsAndValues);
+  }
 }
 
 Future<void> _onConfigure(Database db) async {

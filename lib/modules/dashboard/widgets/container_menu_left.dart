@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/modules/dashboard/widgets/avatar_menu_left.dart';
+import 'package:oficinar/modules/logs/logger_view.dart';
 import 'package:oficinar/widgets/button_action.dart';
+import 'package:provider/provider.dart';
 
 class ContainerMenuLeft extends StatelessWidget {
   const ContainerMenuLeft({super.key});
@@ -43,6 +46,16 @@ class ContainerMenuLeft extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(Icons.person),
                 label: const Text('Clientes')),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+            child: ButtonAction(
+                alignment: Alignment.centerLeft,
+                onPressed: () {
+                  context.read<Navigation>().pageView(LoggerView());
+                },
+                icon: const Icon(Icons.app_registration_outlined),
+                label: const Text('Logs')),
           ),
         ],
       ),

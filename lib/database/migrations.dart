@@ -16,6 +16,6 @@ class Migrations {
     3: '''ALTER TABLE users ADD created_at TEXT NOT NULL;
     ALTER TABLE users ADD updated_at TEXT;
     ALTER TABLE users ADD deleted_at TEXT;''',
-    4: 'INSERT INTO users (id, username, password, created_at) VALUES (1, "admin", "admin", "${DateTime.now().toLocal()}");'
+    4: 'INSERT INTO users (id, username, password, created_at) VALUES (1, "admin", "admin", "${DateTime.now().toLocal()}");',
   };
 }

@@ -5,6 +5,8 @@ import 'package:oficinar/core/database_core.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/injector_depency.dart';
 import 'package:oficinar/modules/dashboard/dashboard_view.dart';
+import 'package:oficinar/modules/logs/logger_controller.dart';
+import 'package:oficinar/modules/logs/logger_model.dart';
 import 'package:oficinar/modules/users/user_model.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 
@@ -26,11 +28,18 @@ class AuthController {
           .and("password = '$password'")
           .toList();
       if (data.isEmpty) {
+        LoggerController(LoggerModel(userModel.username!,
+            "Tentou realizar login", "${DateTime.now().toLocal()}"));
+
         throw Exception("Usuário ou senha inválidos.");
       }
 
       getDep.registerSingleton<UserModel>(UserModel.fromJson(data[0]));
       userModel = getDep.get<UserModel>();
+
+      LoggerController(LoggerModel(userModel.username!,
+          "Realizou login com sucesso", "${DateTime.now().toLocal()}"));
+
       Navigation.pushAndRemovePile(
           DashboardView(userModel: userModel), context);
     } catch (e) {

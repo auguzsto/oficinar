@@ -3,10 +3,7 @@ class Migrations {
     1: '''CREATE TABLE users(
       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       username TEXT NOT NULL UNIQUE,
-      password TEXT NOT NULL,
-      created_at TEXT NOT NULL,
-      updated_at TEXT,
-      deleted_at TEXT
+      password TEXT NOT NULL
     );''',
     2: '''CREATE TABLE logs(
       author TEXT NOT NULL,

@@ -76,7 +76,7 @@ class DatabaseCore {
 
   Future<List<Map<String, dynamic>>> toList() async {
     try {
-      final db = await DatabaseCore(version: version)._init();
+      final db = await _init();
       return db.rawQuery(_query!);
     } catch (e) {
       rethrow;
@@ -85,7 +85,7 @@ class DatabaseCore {
 
   Future<Map<String, dynamic>> single() async {
     try {
-      final db = await DatabaseCore(version: version)._init();
+      final db = await _init();
       final single = await db.rawQuery(_query!);
       if (single.isEmpty) {
         throw Exception("Por favor, tente novamente.");
@@ -98,7 +98,7 @@ class DatabaseCore {
 
   Future<void> insert(
       String table, Map<String, dynamic> columnsAndValues) async {
-    final db = await DatabaseCore(version: version)._init();
+    final db = await _init();
     await db.insert(table, columnsAndValues);
   }
 }

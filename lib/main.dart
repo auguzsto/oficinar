@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/app_widget.dart';
+import 'package:oficinar/core/database_core.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/injector_depency.dart';
 import 'package:oficinar/modules/themes/themes_controller.dart';
@@ -21,3 +22,5 @@ void main() async {
     ),
   );
 }
+
+final db = getDep.get<DatabaseCore>();

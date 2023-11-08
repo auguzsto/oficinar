@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:oficinar/core/database_core.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/injector_depency.dart';
+import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/dashboard/dashboard_view.dart';
 import 'package:oficinar/modules/logs/logger_controller.dart';
 import 'package:oficinar/modules/logs/logger_model.dart';
@@ -14,7 +14,6 @@ class AuthController {
   static Future<void> signIn(
       String username, String password, BuildContext context) async {
     try {
-      final db = getDep.get<DatabaseCore>();
       late UserModel userModel;
 
       userModel = UserModel.fromJson({

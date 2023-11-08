@@ -59,9 +59,24 @@ class DatabaseCore {
     return this;
   }
 
+  DatabaseCore orderByAsc(String columns) {
+    _query = "$_query ORDER BY $columns ASC";
+    return this;
+  }
+
+  DatabaseCore orderByDesc(String columns) {
+    _query = "$_query ORDER BY $columns DESC";
+    return this;
+  }
+
+  DatabaseCore limit(int limit) {
+    _query = "$_query LIMIT $limit";
+    return this;
+  }
+
   Future<List<Map<String, dynamic>>> toList() async {
     try {
-      final db = await DatabaseCore(version: version)._init();
+      final db = await _init();
       return db.rawQuery(_query!);
     } catch (e) {
       rethrow;
@@ -70,7 +85,7 @@ class DatabaseCore {
 
   Future<Map<String, dynamic>> single() async {
     try {
-      final db = await DatabaseCore(version: version)._init();
+      final db = await _init();
       final single = await db.rawQuery(_query!);
       if (single.isEmpty) {
         throw Exception("Por favor, tente novamente.");
@@ -79,6 +94,12 @@ class DatabaseCore {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<void> insert(
+      String table, Map<String, dynamic> columnsAndValues) async {
+    final db = await _init();
+    await db.insert(table, columnsAndValues);
   }
 }
 

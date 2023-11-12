@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/modules/logs/logger_controller.dart';
 import 'package:oficinar/modules/logs/logger_model.dart';
+import 'package:oficinar/widgets/card_menu_container.dart';
 import 'package:oficinar/widgets/scaffold_right_dashboard.dart';
 
 class LoggerView extends StatelessWidget {
@@ -14,6 +15,19 @@ class LoggerView extends StatelessWidget {
       ),
       body: Column(
         children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 6,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                CardMenuContainer(
+                  title: "Procurar",
+                  content: "Procurar por registros específicos",
+                  iconData: Icons.search_rounded,
+                )
+              ],
+            ),
+          ),
           FutureBuilder(
             future: LoggerController.getAll(context),
             builder: (context, snapshot) {
@@ -22,7 +36,7 @@ class LoggerView extends StatelessWidget {
               }
 
               return SizedBox(
-                height: MediaQuery.of(context).size.height / 1.1,
+                height: MediaQuery.of(context).size.height / 1.4,
                 child: ListView.separated(
                   separatorBuilder: (context, index) =>
                       const Divider(height: 1),

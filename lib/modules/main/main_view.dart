@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/modules/main/widgets/container_menu_left.dart';
 import 'package:oficinar/modules/users/user_model.dart';
+import 'package:oficinar/widgets/night_theme_floating.dart';
 import 'package:provider/provider.dart';
 
 class MainView extends StatelessWidget {
@@ -26,6 +27,7 @@ class MainView extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: const NightThemeFloating(),
     );
   }
 }

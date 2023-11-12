@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/modules/consumers/consumers_view.dart';
+import 'package:oficinar/modules/devices/devices_view.dart';
 import 'package:oficinar/modules/main/widgets/avatar_menu_left.dart';
 import 'package:oficinar/modules/logs/logger_view.dart';
+import 'package:oficinar/modules/orderservices/orderservices_view.dart';
 import 'package:oficinar/widgets/button_action.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +31,9 @@ class ContainerMenuLeft extends StatelessWidget {
             child: ButtonAction(
                 alignment: Alignment.centerLeft,
                 onPressed: () {
-                  context.read<Navigation>().pageView(const Column());
+                  context
+                      .read<Navigation>()
+                      .pageView(const OrderServicesView());
                 },
                 icon: const Icon(Icons.build_circle_sharp),
                 label: const Text('Ordens de serviço')),
@@ -38,7 +42,9 @@ class ContainerMenuLeft extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
             child: ButtonAction(
                 alignment: Alignment.centerLeft,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<Navigation>().pageView(const DevicesView());
+                },
                 icon: const Icon(Icons.devices_other_rounded),
                 label: const Text('Aparelhos')),
           ),

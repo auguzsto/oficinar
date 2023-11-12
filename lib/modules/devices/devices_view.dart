@@ -17,7 +17,7 @@ class DevicesView extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: const [
                 CardMenuContainer(
-                  title: "Abrir",
+                  title: "Cadastrar",
                   content: "Realizar cadastro de aparelho",
                   iconData: Icons.build_rounded,
                 ),

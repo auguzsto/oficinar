@@ -19,7 +19,7 @@ class DevicesView extends StatelessWidget {
                 CardMenuContainer(
                   title: "Cadastrar",
                   content: "Realizar cadastro de aparelho",
-                  iconData: Icons.build_rounded,
+                  iconData: Icons.devices_other_rounded,
                 ),
                 CardMenuContainer(
                   title: "Procurar",

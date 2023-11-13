@@ -3,6 +3,7 @@ import 'package:oficinar/app_widget.dart';
 import 'package:oficinar/core/database_core.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/injector_depency.dart';
+import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/themes/themes_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -24,3 +25,4 @@ void main() async {
 }
 
 final db = getDep.get<DatabaseCore>();
+final consumersController = getDep.get<ConsumersController>();

@@ -35,7 +35,7 @@ class HandlerException extends StatelessWidget {
           height: 35,
           onPressed: leftOnPressed ?? () => Navigator.pop(context),
           icon: const Icon(Icons.check_circle),
-          label: Text(textLeftButton ?? "Sim"),
+          label: Text(textLeftButton ?? "Entendido"),
         ),
         ButtonAction(
           height: 35,

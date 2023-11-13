@@ -21,8 +21,8 @@ class Migrations {
       CEP TEXT NO NULL,
       address TEXT NOT NULL,
       phone TEXT NOT NULL UNIQUE,
-      phone2 TEXT NOT NULL UNIQUE,
-      phone3 TEXT NOT NULL UNIQUE,
+      phone2 TEXT,
+      phone3 TEXT,
       created_at TEXT NOT NULL,
       updated_at TEXT,
       deleted_at TEXT

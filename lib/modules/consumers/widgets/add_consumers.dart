@@ -64,6 +64,7 @@ class AddConsumersWidget extends StatelessWidget {
                   context
                       .read<ConsumersController>()
                       .create(_consumerModel, context);
+
                   context.read<Navigation>().pageView(const ConsumersView());
                 } catch (e) {
                   throw showHandler(

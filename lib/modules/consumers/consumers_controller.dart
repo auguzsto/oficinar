@@ -10,6 +10,7 @@ class ConsumersController with ChangeNotifier {
       ConsumersModel consumersModel, BuildContext context) async {
     try {
       await db.insert("consumers", consumersModel.toJson());
+
       notifyListeners();
     } catch (e) {
       throw showHandler(context, HandlerException(content: e.toString()));

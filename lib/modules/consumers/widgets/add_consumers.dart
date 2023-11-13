@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/core/util.dart';
+import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
 import 'package:oficinar/modules/consumers/consumers_view.dart';
+import 'package:oficinar/modules/main/main_view.dart';
 import 'package:oficinar/widgets/button_action.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:oficinar/widgets/input_text.dart';
@@ -64,7 +66,8 @@ class AddConsumersWidget extends StatelessWidget {
                   context
                       .read<ConsumersController>()
                       .create(_consumerModel, context);
-
+                  logger.create(userLogged.username!,
+                      "Registrou um novo cliente ${_consumerModel.fullName}");
                   context.read<Navigation>().pageView(const ConsumersView());
                 } catch (e) {
                   throw showHandler(

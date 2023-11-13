@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
+import 'package:oficinar/modules/main/main_view.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:provider/provider.dart';
 
@@ -49,6 +51,8 @@ class ListConsumersWidget extends StatelessWidget {
                                             Navigator.pop(context),
                                         textLeftButton: "Desejo apagar",
                                         leftOnPressed: () {
+                                          logger.create(userLogged.username!,
+                                              "Deletou cliente ID ${consumerModel.id}");
                                           context
                                               .read<ConsumersController>()
                                               .delete(consumerModel, context);

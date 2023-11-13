@@ -8,10 +8,11 @@ import 'package:oficinar/widgets/handler_exception.dart';
 class LoggerController {
   Future<void> create(String author, String describe) async {
     try {
-      final loggerModel = LoggerModel(
-          author: author,
-          describe: describe,
-          createdAt: "${DateTime.now().toLocal()}");
+      final loggerModel = LoggerModel.fromJson({
+        "author": author,
+        "describe": describe,
+        "created_at": "${DateTime.now().toLocal()}",
+      });
 
       await db.insert("logs", loggerModel.toJson());
     } catch (e) {

@@ -25,6 +25,7 @@ class LoggerModel implements Model {
     return LoggerModel(
       author: json['author'],
       describe: json['describe'],
+      createdAt: json['created_at'],
     );
   }
 

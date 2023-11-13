@@ -16,13 +16,19 @@ class ConsumersController with ChangeNotifier {
     }
   }
 
+  Future<void> delete(
+      ConsumersModel consumersModel, BuildContext context) async {
+    try {
+      await db.delete("consumers", consumersModel.toJson());
+      notifyListeners();
+    } catch (e) {
+      throw showHandler(context, HandlerException(content: e.toString()));
+    }
+  }
+
   static Future<List<Map<String, dynamic>>> getAll() async {
     try {
-      return await db
-          .select("*", "consumers")
-          .orderByDesc("created_at")
-          .limit(10)
-          .toList();
+      return await db.select("*", "consumers").toList();
     } catch (e) {
       rethrow;
     }
@@ -32,6 +38,7 @@ class ConsumersController with ChangeNotifier {
     try {
       return await db
           .select("*", "consumers")
+          .where("deleted_at IS NULL")
           .orderByDesc("created_at")
           .limit(10)
           .toList();

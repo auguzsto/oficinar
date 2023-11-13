@@ -18,7 +18,7 @@ class Migrations {
       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       full_name TEXT NOT NULL,
       email TEXT NOT NULL,
-      CEP TEXT NO NULL,
+      cep TEXT NO NULL,
       address TEXT NOT NULL,
       phone TEXT NOT NULL UNIQUE,
       phone2 TEXT,

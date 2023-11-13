@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
+import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:provider/provider.dart';
 
 class ListConsumersWidget extends StatelessWidget {
@@ -36,6 +37,28 @@ class ListConsumersWidget extends StatelessWidget {
                           ),
                           title: Text(consumerModel.fullName!),
                           subtitle: Text(consumerModel.phone!),
+                          trailing: IconButton(
+                              onPressed: () {
+                                showHandler(
+                                    context,
+                                    HandlerException(
+                                        content:
+                                            "Ao confirmar esta ação, você irá apagar este cliente",
+                                        textRightButton: "Não desejo apagar",
+                                        rightOnPressed: () =>
+                                            Navigator.pop(context),
+                                        textLeftButton: "Desejo apagar",
+                                        leftOnPressed: () {
+                                          context
+                                              .read<ConsumersController>()
+                                              .delete(consumerModel, context);
+                                          Navigator.pop(context);
+                                        }));
+                              },
+                              icon: Icon(
+                                Icons.delete,
+                                color: Theme.of(context).colorScheme.error,
+                              )),
                         );
                       },
                       separatorBuilder: (context, index) => const SizedBox(),

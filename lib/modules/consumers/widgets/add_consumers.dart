@@ -81,7 +81,7 @@ class AddConsumersWidget extends StatelessWidget {
 final _consumerModel = ConsumersModel.fromJson({
   "full_name": _controllerFullName.text,
   "email": _controllerEmail.text,
-  "CEP": _controllerCep.text,
+  "cep": _controllerCep.text,
   "address": _controllerAddress.text,
   "phone": _controllerPhone.text,
   "phone2": _controllerPhone2.text,

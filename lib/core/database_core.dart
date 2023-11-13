@@ -105,6 +105,34 @@ class DatabaseCore {
       rethrow;
     }
   }
+
+  Future<void> update(
+      String table, Map<String, dynamic> columnsAndValues) async {
+    try {
+      final db = await _init();
+      await db.update(table, columnsAndValues,
+          where: "id = ?", whereArgs: [columnsAndValues['id']]);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> delete(
+      String table, Map<String, dynamic> columnsAndValues) async {
+    try {
+      final db = await _init();
+      await db.update(
+          table,
+          {
+            "id": columnsAndValues['id'],
+            "deleted_at": "${DateTime.now().toLocal()}",
+          },
+          where: "id = ?",
+          whereArgs: [columnsAndValues['id']]);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 
 Future<void> _onConfigure(Database db) async {

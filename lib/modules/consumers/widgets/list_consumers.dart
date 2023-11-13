@@ -19,7 +19,7 @@ class ListConsumersWidget extends StatelessWidget {
             animation: context.watch<ConsumersController>(),
             builder: (context, child) {
               return FutureBuilder(
-                future: ConsumersController.getAll(),
+                future: ConsumersController.getByLastAdded(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return const Center(child: CircularProgressIndicator());

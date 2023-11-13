@@ -27,4 +27,16 @@ class ConsumersController with ChangeNotifier {
       rethrow;
     }
   }
+
+  static Future<List<Map<String, dynamic>>> getByLastAdded() async {
+    try {
+      return await db
+          .select("*", "consumers")
+          .orderByDesc("created_at")
+          .limit(10)
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

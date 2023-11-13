@@ -14,7 +14,10 @@ class ScaffoldRightDashboard extends StatelessWidget {
     return Column(
       children: [
         appBar,
-        body,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: body,
+        ),
       ],
     );
   }

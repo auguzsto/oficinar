@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/injector_depency.dart';
 import 'package:oficinar/main.dart';
-import 'package:oficinar/modules/dashboard/dashboard_view.dart';
+import 'package:oficinar/modules/main/main_view.dart';
 import 'package:oficinar/modules/logs/logger_controller.dart';
 import 'package:oficinar/modules/logs/logger_model.dart';
 import 'package:oficinar/modules/users/user_model.dart';
@@ -39,8 +39,7 @@ class AuthController {
       LoggerController(LoggerModel(userModel.username!,
           "Realizou login com sucesso", "${DateTime.now().toLocal()}"));
 
-      Navigation.pushAndRemovePile(
-          DashboardView(userModel: userModel), context);
+      Navigation.pushAndRemovePile(MainView(userModel: userModel), context);
     } catch (e) {
       throw showHandler(
           context,

@@ -98,8 +98,40 @@ class DatabaseCore {
 
   Future<void> insert(
       String table, Map<String, dynamic> columnsAndValues) async {
-    final db = await _init();
-    await db.insert(table, columnsAndValues);
+    try {
+      final db = await _init();
+      await db.insert(table, columnsAndValues);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> update(
+      String table, Map<String, dynamic> columnsAndValues) async {
+    try {
+      final db = await _init();
+      await db.update(table, columnsAndValues,
+          where: "id = ?", whereArgs: [columnsAndValues['id']]);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> delete(
+      String table, Map<String, dynamic> columnsAndValues) async {
+    try {
+      final db = await _init();
+      await db.update(
+          table,
+          {
+            "id": columnsAndValues['id'],
+            "deleted_at": "${DateTime.now().toLocal()}",
+          },
+          where: "id = ?",
+          whereArgs: [columnsAndValues['id']]);
+    } catch (e) {
+      rethrow;
+    }
   }
 }
 

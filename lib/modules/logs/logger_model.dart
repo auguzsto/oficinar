@@ -15,17 +15,17 @@ class LoggerModel implements Model {
   @override
   String? updatedAt;
 
-  LoggerModel(
-    this.author,
-    this.describe,
+  LoggerModel({
+    required this.author,
+    required this.describe,
     this.createdAt,
-  );
+  });
 
   factory LoggerModel.fromJson(Map<String, dynamic> json) {
     return LoggerModel(
-      json['author'],
-      json['describe'],
-      json['created_at'],
+      author: json['author'],
+      describe: json['describe'],
+      createdAt: json['created_at'],
     );
   }
 

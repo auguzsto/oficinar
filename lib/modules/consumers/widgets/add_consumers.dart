@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/core/util.dart';
-import 'package:oficinar/main.dart';
+import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
+import 'package:oficinar/modules/consumers/consumers_view.dart';
 import 'package:oficinar/widgets/button_action.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:oficinar/widgets/input_text.dart';
 import 'package:oficinar/widgets/scaffold_right_dashboard.dart';
+import 'package:provider/provider.dart';
 
 class AddConsumersWidget extends StatelessWidget {
   const AddConsumersWidget({super.key});
@@ -14,7 +17,10 @@ class AddConsumersWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldRightDashboard(
       appBar: AppBar(
-        leading: const Icon(Icons.person_add_rounded),
+        leading: IconButton(
+            onPressed: () =>
+                context.read<Navigation>().pageView(const ConsumersView()),
+            icon: const Icon(Icons.arrow_back)),
         title: const Text("Cadastro de cliente"),
       ),
       body: Column(
@@ -55,7 +61,9 @@ class AddConsumersWidget extends StatelessWidget {
           ButtonAction(
               onPressed: () {
                 try {
-                  consumersController.create(_consumerModel);
+                  context
+                      .read<ConsumersController>()
+                      .create(_consumerModel, context);
                 } catch (e) {
                   throw showHandler(
                       context, HandlerException(content: e.toString()));
@@ -72,7 +80,7 @@ class AddConsumersWidget extends StatelessWidget {
 final _consumerModel = ConsumersModel.fromJson({
   "full_name": _controllerFullName.text,
   "email": _controllerEmail.text,
-  "cep": _controllerCep.text,
+  "CEP": _controllerCep.text,
   "address": _controllerAddress.text,
   "phone": _controllerPhone.text,
   "phone2": _controllerPhone2.text,

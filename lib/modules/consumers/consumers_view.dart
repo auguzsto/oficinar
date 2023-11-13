@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/modules/consumers/widgets/add_consumers.dart';
+import 'package:oficinar/modules/consumers/widgets/list_consumers.dart';
 import 'package:oficinar/widgets/card_menu_container.dart';
 import 'package:oficinar/widgets/scaffold_right_dashboard.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,7 @@ class ConsumersView extends StatelessWidget {
               ],
             ),
           ),
+          const ListConsumersWidget(),
         ],
       ),
     );

@@ -19,7 +19,7 @@ class LoggerView extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 6,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: [
+              children: const [
                 CardMenuContainer(
                   title: "Procurar",
                   content: "Procurar por registros específicos",

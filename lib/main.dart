@@ -16,6 +16,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => ConsumersController()),
         ChangeNotifierProvider(create: (context) => ThemesController()),
         ChangeNotifierProvider(create: (context) => Navigation())
       ],
@@ -25,4 +26,3 @@ void main() async {
 }
 
 final db = getDep.get<DatabaseCore>();
-final consumersController = getDep.get<ConsumersController>();

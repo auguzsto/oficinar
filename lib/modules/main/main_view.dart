@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
+import 'package:oficinar/modules/main/widgets/avatar_menu_left.dart';
 import 'package:oficinar/modules/main/widgets/container_menu_left.dart';
 import 'package:oficinar/modules/users/user_model.dart';
 import 'package:oficinar/widgets/night_theme_floating.dart';
@@ -17,7 +18,14 @@ class MainView extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: Row(
           children: [
-            const ContainerMenuLeft(),
+            Column(
+              children: [
+                AvatarMenuLeft(),
+                const Expanded(
+                  child: ContainerMenuLeft(),
+                ),
+              ],
+            ),
             Expanded(
               child: Container(
                 alignment: Alignment.bottomLeft,

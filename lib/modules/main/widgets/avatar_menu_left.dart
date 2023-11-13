@@ -9,16 +9,27 @@ class AvatarMenuLeft extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: CircleAvatar(
-        maxRadius: MediaQuery.of(context).size.height / 10,
-        backgroundColor: Theme.of(context).colorScheme.background,
-        foregroundColor: Theme.of(context).colorScheme.primary,
-        child: Text(
-          userModel.username![0].toUpperCase(),
-          style: TextStyle(
-              fontSize: Theme.of(context).textTheme.displayLarge!.fontSize),
+    return Container(
+      width: MediaQuery.of(context).size.width / 5,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        border: Border(
+          right: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircleAvatar(
+          maxRadius: MediaQuery.of(context).size.height / 10,
+          backgroundColor: Theme.of(context).colorScheme.background,
+          foregroundColor: Theme.of(context).colorScheme.primary,
+          child: Text(
+            userModel.username![0].toUpperCase(),
+            style: TextStyle(
+                fontSize: Theme.of(context).textTheme.displayLarge!.fontSize),
+          ),
         ),
       ),
     );

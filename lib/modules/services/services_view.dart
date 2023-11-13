@@ -23,8 +23,7 @@ class ServicesView extends StatelessWidget {
                 ),
                 CardMenuContainer(
                   title: "Procurar",
-                  content:
-                      "Pesquise por uma ordem de serviço utilizando seus dados",
+                  content: "Pesquise por uma ordem de serviço",
                   iconData: Icons.search,
                 ),
                 CardMenuContainer(

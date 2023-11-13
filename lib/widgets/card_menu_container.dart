@@ -50,11 +50,14 @@ class CardMenuContainer extends StatelessWidget {
                           style: Theme.of(context).textTheme.headlineLarge,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        Text(
-                          content,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 19.1,
+                          child: Text(
+                            content,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),

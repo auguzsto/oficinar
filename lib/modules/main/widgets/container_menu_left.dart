@@ -4,7 +4,7 @@ import 'package:oficinar/modules/consumers/consumers_view.dart';
 import 'package:oficinar/modules/devices/devices_view.dart';
 import 'package:oficinar/modules/main/widgets/avatar_menu_left.dart';
 import 'package:oficinar/modules/logs/logger_view.dart';
-import 'package:oficinar/modules/orderservices/orderservices_view.dart';
+import 'package:oficinar/modules/services/services_view.dart';
 import 'package:oficinar/widgets/button_action.dart';
 import 'package:provider/provider.dart';
 
@@ -31,9 +31,7 @@ class ContainerMenuLeft extends StatelessWidget {
             child: ButtonAction(
                 alignment: Alignment.centerLeft,
                 onPressed: () {
-                  context
-                      .read<Navigation>()
-                      .pageView(const OrderServicesView());
+                  context.read<Navigation>().pageView(const ServicesView());
                 },
                 icon: const Icon(Icons.build_circle_sharp),
                 label: const Text('Ordens de serviço')),

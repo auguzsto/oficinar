@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:oficinar/widgets/card_menu_container.dart';
 import 'package:oficinar/widgets/scaffold_right_dashboard.dart';
 
-class OrderServicesView extends StatelessWidget {
-  const OrderServicesView({super.key});
+class ServicesView extends StatelessWidget {
+  const ServicesView({super.key});
 
   @override
   Widget build(BuildContext context) {

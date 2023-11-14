@@ -96,11 +96,11 @@ class DatabaseCore {
     }
   }
 
-  Future<void> insert(
+  Future<int> insert(
       String table, Map<String, dynamic> columnsAndValues) async {
     try {
       final db = await _init();
-      await db.insert(table, columnsAndValues);
+      return await db.insert(table, columnsAndValues);
     } catch (e) {
       rethrow;
     }

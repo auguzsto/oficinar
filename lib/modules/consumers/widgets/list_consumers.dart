@@ -40,25 +40,7 @@ class ListConsumersWidget extends StatelessWidget {
                           title: Text(consumerModel.fullName!),
                           subtitle: Text(consumerModel.phone!),
                           trailing: IconButton(
-                              onPressed: () {
-                                showHandler(
-                                    context,
-                                    HandlerException(
-                                        content:
-                                            "Ao confirmar esta ação, você irá apagar este cliente",
-                                        textRightButton: "Não desejo apagar",
-                                        rightOnPressed: () =>
-                                            Navigator.pop(context),
-                                        textLeftButton: "Desejo apagar",
-                                        leftOnPressed: () {
-                                          logger.create(userLogged.username!,
-                                              "Deletou cliente ID ${consumerModel.id}");
-                                          context
-                                              .read<ConsumersController>()
-                                              .delete(consumerModel, context);
-                                          Navigator.pop(context);
-                                        }));
-                              },
+                              onPressed: () => _action(context, consumerModel),
                               icon: Icon(
                                 Icons.delete,
                                 color: Theme.of(context).colorScheme.error,
@@ -75,4 +57,26 @@ class ListConsumersWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+void _action(BuildContext context, ConsumersModel consumerModel) {
+  showHandler(
+    context,
+    HandlerException(
+      content: "Ao confirmar esta ação, você irá apagar este cliente",
+      textRightButton: "Não desejo apagar",
+      rightOnPressed: () => Navigator.pop(context),
+      textLeftButton: "Desejo apagar",
+      leftOnPressed: () {
+        try {
+          context.read<ConsumersController>().delete(consumerModel, context);
+          logger.create(
+              userLogged.username!, "Deletou cliente ID ${consumerModel.id}");
+          Navigator.pop(context);
+        } catch (e) {
+          showHandler(context, HandlerException(content: e.toString()));
+        }
+      },
+    ),
+  );
 }

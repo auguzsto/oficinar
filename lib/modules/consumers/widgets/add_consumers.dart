@@ -1,11 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/core/util.dart';
-import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
 import 'package:oficinar/modules/consumers/consumers_view.dart';
-import 'package:oficinar/modules/main/main_view.dart';
 import 'package:oficinar/widgets/button_action.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:oficinar/widgets/input_text.dart';
@@ -17,6 +17,8 @@ class AddConsumersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final consumersController = context.read<ConsumersController>();
+
     return ScaffoldRightDashboard(
       appBar: AppBar(
         leading: IconButton(
@@ -61,17 +63,11 @@ class AddConsumersWidget extends StatelessWidget {
               iconData: Icons.phone_iphone,
               controller: _controllerPhone3),
           ButtonAction(
-              onPressed: () {
+              onPressed: () async {
                 try {
-                  context
-                      .read<ConsumersController>()
-                      .create(_consumerModel, context);
-                  logger.create(userLogged.username!,
-                      "Registrou um novo cliente ${_consumerModel.fullName}");
-                  context.read<Navigation>().pageView(const ConsumersView());
+                  await consumersController.create(_consumerModel, context);
                 } catch (e) {
-                  throw showHandler(
-                      context, HandlerException(content: e.toString()));
+                  showHandler(context, HandlerException(content: e.toString()));
                 }
               },
               icon: const Icon(Icons.check),

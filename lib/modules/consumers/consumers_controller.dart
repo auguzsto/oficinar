@@ -1,9 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
-import 'package:oficinar/widgets/handler_exception.dart';
+import 'package:oficinar/modules/consumers/consumers_view.dart';
+import 'package:oficinar/modules/main/main_view.dart';
+import 'package:provider/provider.dart';
 
 class ConsumersController with ChangeNotifier {
   Future<void> create(
@@ -11,9 +14,13 @@ class ConsumersController with ChangeNotifier {
     try {
       await db.insert("consumers", consumersModel.toJson());
 
+      context.read<Navigation>().pageView(const ConsumersView());
+      logger.create(userLogged.username!,
+          "Registrou um novo cliente ${consumersModel.fullName}");
+
       notifyListeners();
     } catch (e) {
-      throw showHandler(context, HandlerException(content: e.toString()));
+      rethrow;
     }
   }
 
@@ -23,7 +30,7 @@ class ConsumersController with ChangeNotifier {
       await db.delete("consumers", consumersModel.toJson());
       notifyListeners();
     } catch (e) {
-      throw showHandler(context, HandlerException(content: e.toString()));
+      rethrow;
     }
   }
 

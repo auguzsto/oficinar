@@ -6,6 +6,7 @@ import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
 import 'package:oficinar/modules/consumers/consumers_view.dart';
 import 'package:oficinar/modules/main/main_view.dart';
+import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:provider/provider.dart';
 
 class ConsumersController with ChangeNotifier {
@@ -20,7 +21,7 @@ class ConsumersController with ChangeNotifier {
 
       notifyListeners();
     } catch (e) {
-      rethrow;
+      throw showHandler(context, HandlerException(content: e.toString()));
     }
   }
 
@@ -28,9 +29,14 @@ class ConsumersController with ChangeNotifier {
       ConsumersModel consumersModel, BuildContext context) async {
     try {
       await db.delete("consumers", consumersModel.toJson());
+
+      logger.create(
+          userLogged.username!, "Deletou cliente ID ${consumersModel.id}");
+      Navigator.pop(context);
+
       notifyListeners();
     } catch (e) {
-      rethrow;
+      throw showHandler(context, HandlerException(content: e.toString()));
     }
   }
 

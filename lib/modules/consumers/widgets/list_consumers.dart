@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
-import 'package:oficinar/modules/main/main_view.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:provider/provider.dart';
 
@@ -67,15 +65,10 @@ void _action(BuildContext context, ConsumersModel consumerModel) {
       textRightButton: "Não desejo apagar",
       rightOnPressed: () => Navigator.pop(context),
       textLeftButton: "Desejo apagar",
-      leftOnPressed: () {
-        try {
-          context.read<ConsumersController>().delete(consumerModel, context);
-          logger.create(
-              userLogged.username!, "Deletou cliente ID ${consumerModel.id}");
-          Navigator.pop(context);
-        } catch (e) {
-          showHandler(context, HandlerException(content: e.toString()));
-        }
+      leftOnPressed: () async {
+        await context
+            .read<ConsumersController>()
+            .delete(consumerModel, context);
       },
     ),
   );

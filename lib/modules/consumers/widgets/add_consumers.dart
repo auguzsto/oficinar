@@ -7,7 +7,6 @@ import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
 import 'package:oficinar/modules/consumers/consumers_view.dart';
 import 'package:oficinar/widgets/button_action.dart';
-import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:oficinar/widgets/input_text.dart';
 import 'package:oficinar/widgets/scaffold_right_dashboard.dart';
 import 'package:provider/provider.dart';
@@ -64,11 +63,7 @@ class AddConsumersWidget extends StatelessWidget {
               controller: _controllerPhone3),
           ButtonAction(
               onPressed: () async {
-                try {
-                  await consumersController.create(_consumerModel, context);
-                } catch (e) {
-                  showHandler(context, HandlerException(content: e.toString()));
-                }
+                await consumersController.create(_consumerModel, context);
               },
               icon: const Icon(Icons.check),
               label: const Text("Finalizar cadastro")),

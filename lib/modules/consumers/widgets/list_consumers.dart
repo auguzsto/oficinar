@@ -41,23 +41,7 @@ class ListConsumersWidget extends StatelessWidget {
                           subtitle: Text(consumerModel.phone!),
                           trailing: IconButton(
                               onPressed: () {
-                                showHandler(
-                                    context,
-                                    HandlerException(
-                                        content:
-                                            "Ao confirmar esta ação, você irá apagar este cliente",
-                                        textRightButton: "Não desejo apagar",
-                                        rightOnPressed: () =>
-                                            Navigator.pop(context),
-                                        textLeftButton: "Desejo apagar",
-                                        leftOnPressed: () {
-                                          logger.create(userLogged.username!,
-                                              "Deletou cliente ID ${consumerModel.id}");
-                                          context
-                                              .read<ConsumersController>()
-                                              .delete(consumerModel, context);
-                                          Navigator.pop(context);
-                                        }));
+                                _deleteConsumer(context, consumerModel);
                               },
                               icon: Icon(
                                 Icons.delete,
@@ -75,4 +59,22 @@ class ListConsumersWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+void _deleteConsumer(BuildContext context, ConsumersModel consumersModel) {
+  showHandler(
+    context,
+    HandlerException(
+      content: "Ao confirmar esta ação, você irá apagar este cliente",
+      textRightButton: "Não desejo apagar",
+      rightOnPressed: () => Navigator.pop(context),
+      textLeftButton: "Desejo apagar",
+      leftOnPressed: () {
+        context.read<ConsumersController>().delete(consumersModel, context);
+        logger.create(
+            userLogged.username!, "Deletou cliente ID ${consumersModel.id}");
+        Navigator.pop(context);
+      },
+    ),
+  );
 }

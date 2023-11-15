@@ -7,6 +7,6 @@ final getDep = GetIt.instance;
 void setup() {
   getDep.allowReassignment = true;
   getDep.registerSingletonAsync<DatabaseCore>(
-      () async => DatabaseCore(version: 5));
+      () async => DatabaseCore(version: 7));
   getDep.registerFactory<LoggerController>(() => LoggerController());
 }

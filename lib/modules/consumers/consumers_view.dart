@@ -24,9 +24,8 @@ class ConsumersView extends StatelessWidget {
                   title: "Adicionar",
                   content: "Realizar cadastro de um cliente",
                   iconData: Icons.person_add,
-                  onPressed: () => context
-                      .read<Navigation>()
-                      .pageView(const AddConsumersWidget()),
+                  onPressed: () =>
+                      context.read<Navigation>().pageView(AddConsumersWidget()),
                 ),
                 const CardMenuContainer(
                   title: "Procurar",

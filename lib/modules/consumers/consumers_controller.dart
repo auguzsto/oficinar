@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
+import 'package:oficinar/modules/main/main_view.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 
 class ConsumersController with ChangeNotifier {
@@ -11,6 +12,8 @@ class ConsumersController with ChangeNotifier {
     try {
       await db.insert("consumers", consumersModel.toJson());
 
+      logger.create(userLogged.username!,
+          "Registrou um novo cliente ${consumersModel.fullName}");
       notifyListeners();
     } catch (e) {
       throw showHandler(context, HandlerException(content: e.toString()));

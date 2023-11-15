@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/core/util.dart';
@@ -11,7 +13,15 @@ import 'package:oficinar/widgets/scaffold_right_dashboard.dart';
 import 'package:provider/provider.dart';
 
 class AddConsumersWidget extends StatelessWidget {
-  const AddConsumersWidget({super.key});
+  AddConsumersWidget({super.key});
+
+  final _controllerFullName = TextEditingController();
+  final _controllerEmail = TextEditingController();
+  final _controllerCep = TextEditingController();
+  final _controllerAddress = TextEditingController();
+  final _controllerPhone = TextEditingController();
+  final _controllerPhone2 = TextEditingController();
+  final _controllerPhone3 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +69,20 @@ class AddConsumersWidget extends StatelessWidget {
               iconData: Icons.phone_iphone,
               controller: _controllerPhone3),
           ButtonAction(
-              onPressed: () {
+              onPressed: () async {
                 try {
-                  context
-                      .read<ConsumersController>()
-                      .create(_consumerModel, context);
+                  await context.read<ConsumersController>().create(
+                      ConsumersModel.fromJson({
+                        "full_name": _controllerFullName.text,
+                        "email": _controllerEmail.text,
+                        "cep": _controllerCep.text,
+                        "address": _controllerAddress.text,
+                        "phone": _controllerPhone.text,
+                        "phone2": _controllerPhone2.text,
+                        "phone3": _controllerPhone3.text,
+                        "created_at": "${DateTime.now().toLocal()}"
+                      }),
+                      context);
                   context.read<Navigation>().pageView(const ConsumersView());
                 } catch (e) {
                   throw showHandler(
@@ -77,22 +96,3 @@ class AddConsumersWidget extends StatelessWidget {
     );
   }
 }
-
-final _consumerModel = ConsumersModel.fromJson({
-  "full_name": _controllerFullName.text,
-  "email": _controllerEmail.text,
-  "cep": _controllerCep.text,
-  "address": _controllerAddress.text,
-  "phone": _controllerPhone.text,
-  "phone2": _controllerPhone2.text,
-  "phone3": _controllerPhone3.text,
-  "created_at": "${DateTime.now().toLocal()}"
-});
-
-final _controllerFullName = TextEditingController();
-final _controllerEmail = TextEditingController();
-final _controllerCep = TextEditingController();
-final _controllerAddress = TextEditingController();
-final _controllerPhone = TextEditingController();
-final _controllerPhone2 = TextEditingController();
-final _controllerPhone3 = TextEditingController();

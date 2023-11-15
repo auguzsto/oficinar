@@ -16,7 +16,10 @@ class ConsumersController with ChangeNotifier {
           "Registrou um novo cliente ${consumersModel.fullName}");
       notifyListeners();
     } catch (e) {
-      throw showHandler(context, HandlerException(content: e.toString()));
+      if (e.toString().contains("consumers.phone")) {
+        throw Exception("Já existe um cliente com este número para contato.");
+      }
+      rethrow;
     }
   }
 

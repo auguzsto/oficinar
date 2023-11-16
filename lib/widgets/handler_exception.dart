@@ -28,7 +28,7 @@ class HandlerException extends StatelessWidget {
       ),
       content: Text(
         _handlerContentString(content!),
-        style: Theme.of(context).textTheme.titleMedium,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       actions: [
         ButtonAction(

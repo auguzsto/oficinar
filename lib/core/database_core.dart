@@ -77,6 +77,7 @@ class DatabaseCore {
   Future<List<Map<String, dynamic>>> toList() async {
     try {
       final db = await _init();
+      print(_query!);
       return db.rawQuery(_query!);
     } catch (e) {
       rethrow;

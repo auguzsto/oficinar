@@ -41,13 +41,39 @@ class ConsumersController with ChangeNotifier {
     }
   }
 
+  static Future<List<Map<String, dynamic>>> getByPhone(String value) async {
+    try {
+      return await db
+          .select("*", "consumers")
+          .where("phone LIKE '%$value%'")
+          .and("deleted_at IS NULL")
+          .orderByDesc("created_at")
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> getByName(String value) async {
+    try {
+      return await db
+          .select("*", "consumers")
+          .where("full_name LIKE '%$value%'")
+          .and("deleted_at IS NULL")
+          .orderByDesc("created_at")
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   static Future<List<Map<String, dynamic>>> getByLastAdded() async {
     try {
       return await db
           .select("*", "consumers")
           .where("deleted_at IS NULL")
           .orderByDesc("created_at")
-          .limit(10)
+          .limit(15)
           .toList();
     } catch (e) {
       rethrow;

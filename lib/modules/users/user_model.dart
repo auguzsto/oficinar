@@ -1,28 +1,16 @@
 import 'package:oficinar/core/model.dart';
 
-class UserModel implements Model {
+class UserModel extends Model {
   String? username;
   String? password;
 
-  @override
-  String? createdAt;
-
-  @override
-  String? deletedAt;
-
-  @override
-  int? id;
-
-  @override
-  String? updatedAt;
-
   UserModel({
-    this.id,
+    super.id,
     this.username,
     this.password,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
+    super.createdAt,
+    super.updatedAt,
+    super.deletedAt,
   }) {
     try {
       if (username!.isEmpty) {

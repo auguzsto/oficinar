@@ -27,10 +27,6 @@ class ConsumersController with ChangeNotifier {
       ConsumersModel consumersModel, BuildContext context) async {
     try {
       await db.update("consumers", consumersModel.toJson());
-      await db.update(
-        "consumers",
-        {"updated_at": "${DateTime.now().toLocal()}"},
-      );
 
       logger.create(userLogged.username!,
           "Atualizou os dados do cliente ${consumersModel.fullName}");

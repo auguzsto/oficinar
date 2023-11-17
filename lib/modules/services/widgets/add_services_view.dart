@@ -7,9 +7,9 @@ import 'package:oficinar/widgets/input_text.dart';
 import 'package:oficinar/widgets/scaffold_right_dashboard.dart';
 import 'package:provider/provider.dart';
 
-class ServicesAddView extends StatelessWidget {
+class AddServicesWidget extends StatelessWidget {
   final ConsumersModel consumersModel;
-  const ServicesAddView({
+  const AddServicesWidget({
     super.key,
     required this.consumersModel,
   });

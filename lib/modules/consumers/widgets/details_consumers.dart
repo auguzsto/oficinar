@@ -4,6 +4,7 @@ import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
 import 'package:oficinar/modules/consumers/consumers_view.dart';
+import 'package:oficinar/modules/consumers/widgets/list_details_services_consumer.dart';
 import 'package:oficinar/widgets/alert_sucess.dart';
 import 'package:oficinar/widgets/button_action.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
@@ -58,7 +59,7 @@ class DetailsConsumersView extends StatelessWidget {
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height / 1.5,
+                      height: MediaQuery.of(context).size.height / 1.6,
                       child: ListView(
                         padding: const EdgeInsets.all(12),
                         children: [
@@ -115,12 +116,25 @@ class DetailsConsumersView extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('data2'),
-                ],
+              child: Card(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "OS referentes",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height / 1.4,
+                      child: const ListDetailsServicesConsumerWidget(),
+                    ),
+                  ],
+                ),
               ),
             )
           ],

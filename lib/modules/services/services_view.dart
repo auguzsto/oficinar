@@ -3,7 +3,7 @@ import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
 import 'package:oficinar/modules/consumers/widgets/add_consumers.dart';
-import 'package:oficinar/modules/services/views/add_services_view.dart';
+import 'package:oficinar/modules/services/widgets/add_services_view.dart';
 import 'package:oficinar/widgets/card_menu_container.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:oficinar/widgets/scaffold_right_dashboard.dart';
@@ -134,6 +134,6 @@ void _registerConsumer(BuildContext context) {
 void _registerService(BuildContext context, ConsumersModel consumersModel) {
   context
       .read<Navigation>()
-      .pageView(ServicesAddView(consumersModel: consumersModel));
+      .pageView(AddServicesWidget(consumersModel: consumersModel));
   Navigator.pop(context);
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
-import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
 import 'package:oficinar/modules/consumers/widgets/details_consumers.dart';
-import 'package:oficinar/modules/main/main_view.dart';
+import 'package:oficinar/widgets/alert_sucess.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +43,7 @@ class ListConsumersWidget extends StatelessWidget {
                           subtitle: Text(consumerModel.phone!),
                           trailing: IconButton(
                               onPressed: () {
-                                _deleteConsumer(context, consumerModel);
+                                _dialog(context, consumerModel);
                               },
                               icon: Icon(
                                 Icons.delete,
@@ -64,7 +63,7 @@ class ListConsumersWidget extends StatelessWidget {
   }
 }
 
-void _deleteConsumer(BuildContext context, ConsumersModel consumersModel) {
+void _dialog(BuildContext context, ConsumersModel consumersModel) {
   showHandler(
     context,
     HandlerException(
@@ -72,14 +71,20 @@ void _deleteConsumer(BuildContext context, ConsumersModel consumersModel) {
       textRightButton: "Não desejo apagar",
       rightOnPressed: () => Navigator.pop(context),
       textLeftButton: "Desejo apagar",
-      leftOnPressed: () {
-        context.read<ConsumersController>().delete(consumersModel, context);
-        logger.create(
-            userLogged.username!, "Deletou cliente ID ${consumersModel.id}");
-        Navigator.pop(context);
-      },
+      leftOnPressed: () => _delete(context, consumersModel),
     ),
   );
+}
+
+Future<void> _delete(
+    BuildContext context, ConsumersModel consumersModel) async {
+  try {
+    context.read<ConsumersController>().delete(consumersModel, context);
+    Navigator.pop(context);
+    showSuccess(context);
+  } catch (e) {
+    throw showHandler(context, HandlerException(content: e.toString()));
+  }
 }
 
 void _detailsConsumer(BuildContext context, ConsumersModel consumersModel) {

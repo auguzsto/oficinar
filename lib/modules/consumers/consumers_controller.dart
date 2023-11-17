@@ -40,6 +40,9 @@ class ConsumersController with ChangeNotifier {
       ConsumersModel consumersModel, BuildContext context) async {
     try {
       await db.delete("consumers", consumersModel.toJson());
+
+      logger.create(
+          userLogged.username!, "Removeu o cliente ${consumersModel.fullName}");
       notifyListeners();
     } catch (e) {
       throw showHandler(context, HandlerException(content: e.toString()));

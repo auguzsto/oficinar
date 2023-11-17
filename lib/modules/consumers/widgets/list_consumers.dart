@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
+import 'package:oficinar/modules/consumers/widgets/details_consumers.dart';
 import 'package:oficinar/modules/main/main_view.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +35,7 @@ class ListConsumersWidget extends StatelessWidget {
                         final consumerModel =
                             ConsumersModel.fromJson(snapshot.data![index]);
                         return ListTile(
+                          onTap: () => _detailsConsumer(context, consumerModel),
                           contentPadding: const EdgeInsets.all(0),
                           leading: CircleAvatar(
                             child: Text(consumerModel.fullName![0]),
@@ -77,4 +80,10 @@ void _deleteConsumer(BuildContext context, ConsumersModel consumersModel) {
       },
     ),
   );
+}
+
+void _detailsConsumer(BuildContext context, ConsumersModel consumersModel) {
+  context
+      .read<Navigation>()
+      .pageView(DetailsConsumersView(consumersModel: consumersModel));
 }

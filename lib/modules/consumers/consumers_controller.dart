@@ -23,6 +23,23 @@ class ConsumersController with ChangeNotifier {
     }
   }
 
+  Future<void> update(
+      ConsumersModel consumersModel, BuildContext context) async {
+    try {
+      await db.update("consumers", consumersModel.toJson());
+      await db.update(
+        "consumers",
+        {"updated_at": "${DateTime.now().toLocal()}"},
+      );
+
+      logger.create(userLogged.username!,
+          "Atualizou os dados do cliente ${consumersModel.fullName}");
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> delete(
       ConsumersModel consumersModel, BuildContext context) async {
     try {

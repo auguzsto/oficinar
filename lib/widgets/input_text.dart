@@ -7,6 +7,7 @@ class InputTextWidget extends StatelessWidget {
   final TextEditingController? controller;
   final bool? obscureText;
   final MaskTextInputFormatter? formatter;
+  final String? initialValue;
   const InputTextWidget({
     super.key,
     required this.labelText,
@@ -14,6 +15,7 @@ class InputTextWidget extends StatelessWidget {
     this.controller,
     this.obscureText,
     this.formatter,
+    this.initialValue,
   });
 
   @override
@@ -21,6 +23,7 @@ class InputTextWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: TextFormField(
+        initialValue: initialValue,
         controller: controller,
         obscureText: obscureText ?? false,
         inputFormatters: [formatter ?? MaskTextInputFormatter()],

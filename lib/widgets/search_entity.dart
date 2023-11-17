@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oficinar/core/model.dart';
 
 class SearchEntityWidget extends StatelessWidget {
   final String titleBar;
@@ -43,6 +44,9 @@ class SearchEntityWidget extends StatelessWidget {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      onTap: () {
+                        Model.fromJson(snapshot.data?[index] ?? {});
+                      },
                       leading: CircleAvatar(
                         child: Text(snapshot.data?[index][attrListTitle][0]),
                       ),

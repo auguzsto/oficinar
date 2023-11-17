@@ -4,16 +4,18 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 class InputTextWidget extends StatelessWidget {
   final String labelText;
   final IconData iconData;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final bool? obscureText;
   final MaskTextInputFormatter? formatter;
+  final String? initialValue;
   const InputTextWidget({
     super.key,
     required this.labelText,
     required this.iconData,
-    required this.controller,
+    this.controller,
     this.obscureText,
     this.formatter,
+    this.initialValue,
   });
 
   @override
@@ -21,6 +23,7 @@ class InputTextWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: TextFormField(
+        initialValue: initialValue,
         controller: controller,
         obscureText: obscureText ?? false,
         inputFormatters: [formatter ?? MaskTextInputFormatter()],

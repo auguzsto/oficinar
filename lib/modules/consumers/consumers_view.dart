@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/core/navigation.dart';
-import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/widgets/add_consumers.dart';
 import 'package:oficinar/modules/consumers/widgets/list_consumers.dart';
+import 'package:oficinar/modules/consumers/widgets/search_consumers.dart';
 import 'package:oficinar/widgets/card_menu_container.dart';
 import 'package:oficinar/widgets/scaffold_right_dashboard.dart';
-import 'package:oficinar/widgets/search_entity.dart';
 import 'package:provider/provider.dart';
 
 class ConsumersView extends StatelessWidget {
@@ -26,8 +25,7 @@ class ConsumersView extends StatelessWidget {
                   title: "Adicionar",
                   content: "Realizar cadastro de um cliente",
                   iconData: Icons.person_add,
-                  onPressed: () =>
-                      context.read<Navigation>().pageView(AddConsumersWidget()),
+                  onPressed: () => _createConsumers(context),
                 ),
                 CardMenuContainer(
                   title: "Procurar",
@@ -56,20 +54,12 @@ void _searchConsumers(BuildContext context) {
     builder: (context) {
       return Dialog(
         shape: OutlineInputBorder(borderRadius: BorderRadius.circular(0)),
-        child: SearchEntityWidget(
-          attrListTitle: "full_name",
-          atttrListSubtitle: "phone",
-          titleBar: "Clientes",
-          hintText: "Procure pelo nome do cliente",
-          iconData: Icons.person,
-          searchDefault: () {
-            return ConsumersController.getByLastAdded();
-          },
-          searchInputSearch: (inputValue) {
-            return ConsumersController.getByName(inputValue);
-          },
-        ),
+        child: const SearchConsumersWidget(),
       );
     },
   );
+}
+
+void _createConsumers(BuildContext context) {
+  context.read<Navigation>().pageView(AddConsumersWidget());
 }

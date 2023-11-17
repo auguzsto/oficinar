@@ -11,6 +11,14 @@ class Navigation with ChangeNotifier {
         (route) => false);
   }
 
+  static void push(Widget view, BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => view,
+        ));
+  }
+
   static void popAndRemovePile(BuildContext context) {
     Navigator.popUntil(context, (route) => false);
   }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:oficinar/main.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
+import 'package:oficinar/modules/main/main_view.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 
 class ConsumersController with ChangeNotifier {
@@ -11,9 +12,27 @@ class ConsumersController with ChangeNotifier {
     try {
       await db.insert("consumers", consumersModel.toJson());
 
+      logger.create(userLogged.username!,
+          "Registrou um novo cliente ${consumersModel.fullName}");
       notifyListeners();
     } catch (e) {
-      throw showHandler(context, HandlerException(content: e.toString()));
+      if (e.toString().contains("consumers.phone")) {
+        throw Exception("Já existe um cliente com este número para contato.");
+      }
+      rethrow;
+    }
+  }
+
+  Future<void> update(
+      ConsumersModel consumersModel, BuildContext context) async {
+    try {
+      await db.update("consumers", consumersModel.toJson());
+
+      logger.create(userLogged.username!,
+          "Atualizou os dados do cliente ${consumersModel.fullName}");
+      notifyListeners();
+    } catch (e) {
+      rethrow;
     }
   }
 
@@ -21,6 +40,9 @@ class ConsumersController with ChangeNotifier {
       ConsumersModel consumersModel, BuildContext context) async {
     try {
       await db.delete("consumers", consumersModel.toJson());
+
+      logger.create(
+          userLogged.username!, "Removeu o cliente ${consumersModel.fullName}");
       notifyListeners();
     } catch (e) {
       throw showHandler(context, HandlerException(content: e.toString()));
@@ -35,13 +57,39 @@ class ConsumersController with ChangeNotifier {
     }
   }
 
+  static Future<List<Map<String, dynamic>>> getByPhone(String value) async {
+    try {
+      return await db
+          .select("*", "consumers")
+          .where("phone LIKE '%$value%'")
+          .and("deleted_at IS NULL")
+          .orderByDesc("created_at")
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> getByName(String value) async {
+    try {
+      return await db
+          .select("*", "consumers")
+          .where("full_name LIKE '%$value%'")
+          .and("deleted_at IS NULL")
+          .orderByDesc("created_at")
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   static Future<List<Map<String, dynamic>>> getByLastAdded() async {
     try {
       return await db
           .select("*", "consumers")
           .where("deleted_at IS NULL")
           .orderByDesc("created_at")
-          .limit(10)
+          .limit(15)
           .toList();
     } catch (e) {
       rethrow;

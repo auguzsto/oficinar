@@ -6,6 +6,9 @@ class ButtonAction extends StatelessWidget {
   final Widget label;
   final double? height;
   final Alignment? alignment;
+  final Color? backgroundColor;
+  final double? elevation;
+  final Color? shadowColor;
   const ButtonAction({
     super.key,
     this.alignment,
@@ -13,6 +16,9 @@ class ButtonAction extends StatelessWidget {
     required this.icon,
     required this.label,
     this.height,
+    this.backgroundColor,
+    this.elevation,
+    this.shadowColor,
   });
 
   @override
@@ -21,6 +27,9 @@ class ButtonAction extends StatelessWidget {
       height: height ?? 50,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
+          shadowColor: shadowColor,
+          elevation: elevation,
+          backgroundColor: backgroundColor,
           alignment: alignment ?? Alignment.center,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),

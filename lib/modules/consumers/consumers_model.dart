@@ -1,6 +1,6 @@
 import 'package:oficinar/core/model.dart';
 
-class ConsumersModel implements Model {
+class ConsumersModel extends Model {
   String? fullName;
   String? email;
   String? cep;
@@ -8,20 +8,8 @@ class ConsumersModel implements Model {
   String? phone;
   String? phone2;
   String? phone3;
-  @override
-  String? createdAt;
-
-  @override
-  String? deletedAt;
-
-  @override
-  int? id;
-
-  @override
-  String? updatedAt;
 
   ConsumersModel({
-    this.id,
     this.fullName,
     this.email,
     this.cep,
@@ -29,9 +17,10 @@ class ConsumersModel implements Model {
     this.phone,
     this.phone2,
     this.phone3,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
+    super.id,
+    super.createdAt,
+    super.updatedAt,
+    super.deletedAt,
   }) {
     try {
       if (fullName!.isEmpty || fullName!.length < 5) {

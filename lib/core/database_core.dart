@@ -112,6 +112,13 @@ class DatabaseCore {
       final db = await _init();
       await db.update(table, columnsAndValues,
           where: "id = ?", whereArgs: [columnsAndValues['id']]);
+      await db.update(
+          table,
+          {
+            "updated_at": "${DateTime.now().toLocal()}",
+          },
+          where: "id = ?",
+          whereArgs: [columnsAndValues['id']]);
     } catch (e) {
       rethrow;
     }

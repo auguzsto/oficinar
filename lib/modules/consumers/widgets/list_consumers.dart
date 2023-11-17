@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:oficinar/main.dart';
+import 'package:oficinar/core/navigation.dart';
 import 'package:oficinar/modules/consumers/consumers_controller.dart';
 import 'package:oficinar/modules/consumers/consumers_model.dart';
-import 'package:oficinar/modules/main/main_view.dart';
+import 'package:oficinar/modules/consumers/widgets/details_consumers.dart';
+import 'package:oficinar/widgets/alert_sucess.dart';
 import 'package:oficinar/widgets/handler_exception.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,7 @@ class ListConsumersWidget extends StatelessWidget {
                         final consumerModel =
                             ConsumersModel.fromJson(snapshot.data![index]);
                         return ListTile(
+                          onTap: () => _detailsConsumer(context, consumerModel),
                           contentPadding: const EdgeInsets.all(0),
                           leading: CircleAvatar(
                             child: Text(consumerModel.fullName![0]),
@@ -41,23 +43,7 @@ class ListConsumersWidget extends StatelessWidget {
                           subtitle: Text(consumerModel.phone!),
                           trailing: IconButton(
                               onPressed: () {
-                                showHandler(
-                                    context,
-                                    HandlerException(
-                                        content:
-                                            "Ao confirmar esta ação, você irá apagar este cliente",
-                                        textRightButton: "Não desejo apagar",
-                                        rightOnPressed: () =>
-                                            Navigator.pop(context),
-                                        textLeftButton: "Desejo apagar",
-                                        leftOnPressed: () {
-                                          logger.create(userLogged.username!,
-                                              "Deletou cliente ID ${consumerModel.id}");
-                                          context
-                                              .read<ConsumersController>()
-                                              .delete(consumerModel, context);
-                                          Navigator.pop(context);
-                                        }));
+                                _dialog(context, consumerModel);
                               },
                               icon: Icon(
                                 Icons.delete,
@@ -75,4 +61,34 @@ class ListConsumersWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+void _dialog(BuildContext context, ConsumersModel consumersModel) {
+  showHandler(
+    context,
+    HandlerException(
+      content: "Ao confirmar esta ação, você irá apagar este cliente",
+      textRightButton: "Não desejo apagar",
+      rightOnPressed: () => Navigator.pop(context),
+      textLeftButton: "Desejo apagar",
+      leftOnPressed: () => _delete(context, consumersModel),
+    ),
+  );
+}
+
+Future<void> _delete(
+    BuildContext context, ConsumersModel consumersModel) async {
+  try {
+    context.read<ConsumersController>().delete(consumersModel, context);
+    Navigator.pop(context);
+    showSuccess(context);
+  } catch (e) {
+    throw showHandler(context, HandlerException(content: e.toString()));
+  }
+}
+
+void _detailsConsumer(BuildContext context, ConsumersModel consumersModel) {
+  context
+      .read<Navigation>()
+      .pageView(DetailsConsumersView(consumersModel: consumersModel));
 }

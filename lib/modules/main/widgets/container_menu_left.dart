@@ -24,6 +24,16 @@ Map<int, dynamic> _menu = {
     "page": const ConsumersView(),
   },
   3: {
+    "title": "Relatórios",
+    "icon": Icons.report,
+    "page": const Center(),
+  },
+  4: {
+    "title": "Polícias de segurança",
+    "icon": Icons.policy,
+    "page": const Center(),
+  },
+  5: {
     "title": "Logs",
     "icon": Icons.app_registration_outlined,
     "page": const LoggerView(),

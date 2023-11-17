@@ -27,5 +27,30 @@ class Migrations {
       updated_at TEXT,
       deleted_at TEXT
     ); ''',
+    6: '''CREATE TABLE devices(
+      id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+      consumer_id INTEGER,
+      name TEXT NOT NULL,
+      model TEXT NOT NULL,
+      serial_number INTEGER NOT NULL UNIQUE,
+      mark TEXT NOT NULL,
+      FOREIGN KEY(consumer_id) REFERENCES consumers(id)
+    ); ''',
+    7: '''CREATE TABLE services(
+      id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+      device_id INTEGER,
+      technician_id INTEGER,
+      status TEXT NOT NULL,
+      price INT NOT NULL,
+      describe TEXT NOT NULL,
+      FOREIGN KEY(device_id) REFERENCES devices(id),
+      FOREIGN KEY(technician_id) REFERENCES users(id)
+    );''',
+    8: '''ALTER TABLE devices ADD craeted_at TEXT NOT NULL;
+    ALTER TABLE devices ADD updated_at TEXT;
+    ALTER TABLE devices ADD deleted_at TEXT;
+    ALTER TABLE services ADD created_at TEXT NOT NULL;
+    ALTER TABLE services ADD updated_at TEXT;
+    ALTER TABLE services ADD deleted_at TEXT;''',
   };
 }

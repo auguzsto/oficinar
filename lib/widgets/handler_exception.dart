@@ -7,6 +7,7 @@ class HandlerException extends StatelessWidget {
   final String? textLeftButton;
   final void Function()? rightOnPressed;
   final String? textRightButton;
+  final IconData? iconData;
   const HandlerException({
     super.key,
     this.content,
@@ -14,6 +15,7 @@ class HandlerException extends StatelessWidget {
     this.textLeftButton,
     this.rightOnPressed,
     this.textRightButton,
+    this.iconData,
   });
 
   @override
@@ -23,12 +25,12 @@ class HandlerException extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         maxRadius: MediaQuery.of(context).size.height / 10,
-        child:
-            Icon(Icons.warning, size: MediaQuery.of(context).size.height / 10),
+        child: Icon(iconData ?? Icons.warning,
+            size: MediaQuery.of(context).size.height / 10),
       ),
       content: Text(
         _handlerContentString(content!),
-        style: Theme.of(context).textTheme.titleMedium,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       actions: [
         ButtonAction(
